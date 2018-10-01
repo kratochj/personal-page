@@ -2,7 +2,7 @@ pipeline {
     
     environment {
         registry = "registry.kratochvil.eu/personal-page"
-        dockerImage = ‘’
+        dockerImage = ''
     }
     
     agent any
