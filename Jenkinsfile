@@ -21,6 +21,9 @@ pipeline {
 				 expression { env.BRANCH_NAME == "master" }
 			}
 			steps {
+            	script {
+					echo "Deploying master"
+				}
                 script {
                     docker.withRegistry( '' ) {
                         dockerImage.push("$BUILD_NUMBER")
@@ -32,6 +35,9 @@ pipeline {
 		
         stage('Deploy to registry (all)') {
             steps{
+            	script {
+					echo "Deploying everything"
+				}
                 script {
                     docker.withRegistry( '' ) {
                         dockerImage.push("$BRANCH_NAME-$BUILD_NUMBER")
