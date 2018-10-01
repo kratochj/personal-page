@@ -51,15 +51,9 @@ pipeline {
 				 expression { env.BRANCH_NAME == "master" }
 			}
 			steps {
-            	script {
 					echo "Deploying new docker image"
-				}
-                script {
-						"docker rm -f personal-page"
-                }
-                script {
-					"docker run -d -p 27033:80 registry:$GIT_COMMIT"
-                }
+					sh "docker rm -f personal-page"
+					sh "docker run -d -p 27033:80 registry:$GIT_COMMIT"
 			}
 		}
     }
