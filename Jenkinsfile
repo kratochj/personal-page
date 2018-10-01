@@ -15,4 +15,13 @@ pipeline {
             }
         }
     }
+    stage(‘Push Image to registry’) {
+        steps{
+            script {
+                docker.withRegistry( ‘’ ) {
+                    dockerImage.push()
+                }
+            }
+        }
+    }
 }
