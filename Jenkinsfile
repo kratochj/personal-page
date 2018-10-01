@@ -52,7 +52,7 @@ pipeline {
 			}
 			steps {
 					echo "Deploying new docker image"
-					sh "docker rm -f personal-page"
+					# sh "docker rm -f personal-page"
 					sh "docker run -d -p 27033:80 $registry:$GIT_COMMIT"
 			}
 		}
