@@ -5,7 +5,7 @@ pipeline {
         dockerImage = ''
     }
     
-    agent docker
+    agent any
 
     stages {
         stage('Build') {
