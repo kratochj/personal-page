@@ -11,16 +11,17 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                    dockerImage.tag "$GIT_COMMIT"
+                    dockerImage = docker.build registry
                 }        
             }
         }
         stage('Push to registry') {
             steps{
                 script {
-                    docker.withRegistry( registry ) {
-                        docker.push()
+                    docker.withRegistry( '' ) {
+                        dockerImage.push("$BUILD_NUMBER")
+                        dockerImage.push("$GIT_COMMIT")
+                        dockerImage.push("latest") 
                     }
                 }
             }
