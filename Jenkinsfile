@@ -14,14 +14,16 @@ pipeline {
                 }        
             }
         }
-    }
-    stage('Push to registry') {
-        steps{
-            script {
-                docker.withRegistry( ‘’ ) {
-                    dockerImage.push()
+        stage('Push to registry') {
+            steps{
+                script {
+                    docker.withRegistry( ‘’ ) {
+                        dockerImage.push()
+                    }
                 }
             }
-        }
+        }   
+    
     }
+   
 }
