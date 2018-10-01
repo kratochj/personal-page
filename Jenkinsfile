@@ -1,10 +1,17 @@
 pipeline {
+    
+    environment {
+       registry = "registry.kratochvil.eu/personal-page"
+    }
+    
     agent any
 
     stages {
         stage('Build') {
             steps {
-                echo "Compiling..."
+                script {
+                    docker.build registry + ":$BUILD_NUMBER"
+                }        
             }
         }
     }
