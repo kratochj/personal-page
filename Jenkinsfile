@@ -58,7 +58,7 @@ pipeline {
 						docker rm -f personal-page
                 }
                 script {
-						docker run -d -p 27033:80 registry:env.GIT_COMMIT
+					echo "docker run -d -p 27033:80 registry:env.GIT_COMMIT"
                 }
 			}
 		}
