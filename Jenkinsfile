@@ -55,10 +55,10 @@ pipeline {
 					echo "Deploying new docker image"
 				}
                 script {
-						docker rm -f personal-page
+						"docker rm -f personal-page"
                 }
                 script {
-					echo "docker run -d -p 27033:80 registry:env.GIT_COMMIT"
+					"docker run -d -p 27033:80 registry:$GIT_COMMIT"
                 }
 			}
 		}
