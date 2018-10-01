@@ -20,7 +20,7 @@ pipeline {
             steps{
                 script {
                     docker.withRegistry( registry ) {
-                        push()
+                        docker.push()
                     }
                 }
             }
