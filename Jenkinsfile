@@ -52,7 +52,8 @@ pipeline {
 			}
 			steps {
 					echo "Deploying new docker image"
-					// sh "docker rm -f personal-page"
+					sh "docker stop  personal-page"
+					sh "docker rm personal-page"
 					sh "docker run -d -p 27033:80 --name personal-page $registry:$GIT_COMMIT"
 			}
 		}
