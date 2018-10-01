@@ -5,7 +5,7 @@ pipeline {
         dockerImage = ''
     }
     
-    agent any
+    agent docker
 
     stages {
         stage('Build') {
@@ -16,6 +16,20 @@ pipeline {
             }
         }
 		
+        stage('Deploy to registry (all)') {
+            steps{
+            	script {
+					echo "Deploying everything"
+				}
+                script {
+                    docker.withRegistry( '' ) {
+                        dockerImage.push("$BRANCH_NAME-$BUILD_NUMBER")
+                        dockerImage.push("$GIT_COMMIT")
+                    }
+                }
+            }
+        }   
+    
 		stage('Deploy to registry (master)') {
 			when {
 				 expression { env.BRANCH_NAME == "master" }
@@ -29,18 +43,22 @@ pipeline {
                 }
 			}
 		}
-		
-        stage('Deploy to registry (all)') {
-            steps{
+		stage('Redeploy image') {
+			when {
+				 expression { env.BRANCH_NAME == "master" }
+			}
+			steps {
+            	script {
+					echo "Deploying new docker image"
+				}
                 script {
-                    docker.withRegistry( '' ) {
-                        dockerImage.push("$BRANCH_NAME-$BUILD_NUMBER")
-                        dockerImage.push("$GIT_COMMIT")
-                    }
+						docker rm -f personal-page
                 }
-            }
-        }   
-    
+                script {
+						docker run -d -p 27033:80 registry:$GIT_COMMIT
+                }
+			}
+		}
     }
    
 }
