@@ -1,7 +1,8 @@
 pipeline {
     
     environment {
-       registry = "registry.kratochvil.eu/personal-page"
+        registry = "registry.kratochvil.eu/personal-page"
+        dockerImage = ‘’
     }
     
     agent any
@@ -10,7 +11,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    docker.build registry + ":$BUILD_NUMBER"
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 }        
             }
         }
