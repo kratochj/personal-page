@@ -3,6 +3,7 @@ pipeline {
     environment {
         registry = "registry.kratochvil.eu/personal-page"
         dockerImage = ''
+        registryCredential = 'dockerhub'
     }
     
     agent any
@@ -22,7 +23,7 @@ pipeline {
 					echo "Deploying everything"
 				}
                 script {
-                    docker.withRegistry( '' ) {
+                    docker.withRegistry( '', registryCredential ) {
                         dockerImage.push("$BRANCH_NAME-$BUILD_NUMBER")
                         dockerImage.push("$GIT_COMMIT")
                     }
@@ -39,7 +40,7 @@ pipeline {
 					echo "Deploying master"
 				}
                 script {
-                    docker.withRegistry( '' ) {
+                    docker.withRegistry( '', registryCredential ) {
                         dockerImage.push("$BUILD_NUMBER")
                         dockerImage.push("latest") 
                     }
