@@ -23,7 +23,7 @@ pipeline {
 					echo "Deploying everything"
 				}
                 script {
-                    docker.withRegistry( '', registryCredential ) {
+                    docker.withRegistry( 'registry.kratochvil.eu', registryCredential ) {
                         dockerImage.push("$BRANCH_NAME-$BUILD_NUMBER")
                         dockerImage.push("$GIT_COMMIT")
                     }
@@ -40,7 +40,7 @@ pipeline {
 					echo "Deploying master"
 				}
                 script {
-                    docker.withRegistry( '', registryCredential ) {
+                    docker.withRegistry( 'registry.kratochvil.eu', registryCredential ) {
                         dockerImage.push("$BUILD_NUMBER")
                         dockerImage.push("latest") 
                     }
