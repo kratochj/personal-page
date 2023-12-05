@@ -35,3 +35,9 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
         enableBuildKit: true
         labels: "commit=${{ env.COMMIT_URL }}"
+    - name: Webhook
+      uses: distributhor/workflow-webhook@v3
+      with:
+        webhook_url: ${{ secrets.PORTAINER_WEBHOOK }}
+    - name: Image digest
+      run: echo ${{ steps.docker_build.outputs.digest }}                
