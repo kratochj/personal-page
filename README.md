@@ -1,3 +1,5 @@
+[![Docker Image CI](https://github.com/kratochj/personal-page/actions/workflows/docker-image.yml/badge.svg)](https://github.com/kratochj/personal-page/actions/workflows/docker-image.yml)
+
 =============================
 
 The Personal Page
